@@ -1,0 +1,27 @@
+html * {
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
+  text-align: center;
+}
+
+#eventName {
+  font-size: 5vmin;
+  font-weight: bold;
+}
+
+#matchText {
+  font-size: 5vmin;
+}
+
+#countdown {
+  font-size: 50vmin;
+  padding-top: 0;
+  margin-top: 0;
+}
+
+.fll-logo {
+  width: 20vmax;
+}
+
+.game-logo {
+  width: 17vmax;
+}
