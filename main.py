@@ -13,10 +13,13 @@ class MainHandler(tornado.web.RequestHandler):
         self.write("yay")
 
 application = tornado.web.Application([
+  (r'/match_control()', tornado.web.StaticFileHandler, {"path": "./match_control.html"}),
   (r'/match_control/websocket', match_control.MatchControlWebsocketHandler),
+  (r'/display_audience()', tornado.web.StaticFileHandler, {"path": "./display_audience.html"}),
   (r'/display_audience/websocket', display_audience.DisplayAudienceWebsocketHandler),
-  (r'/', MainHandler),
+  (r'/setup()', tornado.web.StaticFileHandler, {"path": "./setup.html"}),
   (r"/schedule_upload", setup.MatchListUploadHandler),
+  (r'/', MainHandler),
   (r"/(.*)", tornado.web.StaticFileHandler, {"path": "./"}),
 ])
 
