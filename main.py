@@ -3,6 +3,7 @@ import tornado.web
 import tornado.websocket
 import tornado.template
 
+import setup
 import match_control
 import display_audience
 
@@ -15,6 +16,7 @@ application = tornado.web.Application([
   (r'/match_control/websocket', match_control.MatchControlWebsocketHandler),
   (r'/display_audience/websocket', display_audience.DisplayAudienceWebsocketHandler),
   (r'/', MainHandler),
+  (r"/schedule_upload", setup.MatchListUploadHandler),
   (r"/(.*)", tornado.web.StaticFileHandler, {"path": "./"}),
 ])
 
