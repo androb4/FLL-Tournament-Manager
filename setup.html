@@ -1,16 +1,63 @@
 <html>
-  <head>
-    <title>Setup</title>
-    <script src="/js/jquery-1.11.3.min.js"></script>
-  </head>
 
-  <body>
-    <form enctype="multipart/form-data" action="/schedule_upload" method="post">
-      File:
-      <input type="file" name="filearg" />
-      <br />
-      <br />
-      <input type="submit" value="upload" />
-    </form>
-  </body>
+<head>
+  <title>Setup</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" type="text/css" href="/lib/bootstrap/css/bootstrap.min.css">
+  <script src="/js/jquery-1.11.3.min.js"></script>
+  <script src="/lib/bootstrap/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+  <nav class="navbar navbar-default navbar-inverse">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <a class="navbar-brand" href="/index">FLL Tournament Manager</a>
+      </div>
+      <div>
+        <ul class="nav navbar-nav">
+          <li><a href="/match_control">Match Control</a></li>
+          <li><a href="#">Page 2</a></li>
+          <li class="active"><a href="/setup">Setup</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container-fluid" style="margin-left:40px; margin-right:400px">
+
+    <div class="page-header">
+      <h1>Event Setup
+        <small></small>
+      </h1>
+    </div>
+    <div class="well">
+        <h3>Match Schedule
+          <small>Upload a match schedule</small>
+        </h3>
+      <form enctype="multipart/form-data" action="/schedule_upload" method="post">
+        <input type="file" name="filearg"/>
+        <br>
+        <input class="btn btn-primary" type="submit" value="Upload"/>
+      </form>
+      <br>
+      <h3>Audio Output
+        <small>Select an output source for match sounds</small>
+      </h3>
+      <form>
+        <input type="radio" name="audio-source" value="controller" checked> Match Controller</input>
+        <br>
+        <input type="radio" name="audio-source" value="audience-display"> Audience Display</input>
+        <br>
+        <br>
+        <input class="btn btn-primary" type="submit" value="Save"/>
+      </form>
+      <form enctype="multipart/form-data" action="/schedule_upload" method="post">
+
+      </form>
+    </div>
+  </div>
+</body>
+
 </html>
