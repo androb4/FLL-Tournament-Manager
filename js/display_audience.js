@@ -27,10 +27,8 @@ function setup() {
         }
 
         socket.onmessage = function(msg) {
-          if(msg.data.startsWith('timeString')) {
-            document.getElementById('countdown').innerHTML = msg.data.split(';')[1];
-          }
-            showServerResponse(msg.data);
+          showServerResponse(msg.data);
+          document.getElementById('countdown').innerHTML = JSON.parse(msg.data).timeString;
         }
 
         socket.onclose = function() {
