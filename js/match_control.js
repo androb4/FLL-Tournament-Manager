@@ -1,3 +1,25 @@
+function updateMatchList(matches) {
+  var table = document.getElementById("matchListTable");
+
+  while (table.rows.length-1 > 0) {
+    table.deleteRow(1);
+  }
+
+  for (m=0; m<matches.length; m++) {
+    var row = table.insertRow(m+1);
+    var cell;
+
+    if(m==0)
+      row.classList.add("success");
+
+    cell = row.insertCell(0);
+    cell.innerHTML = matches[m].matchNumber;
+
+    cell = row.insertCell(1);
+    cell.innerHTML = matches[m].matchTime;
+  }
+}
+
 $(function() {
   if (!('WebSocket' in window)) {
     alert('Your browser does not support web sockets');
@@ -21,10 +43,18 @@ $(function() {
   // event handlers for websocket
   if (socket) {
 
-    socket.onopen = function() {}
+    socket.onopen = function() {
+
+    }
 
     socket.onmessage = function(msg) {
-      showServerResponse(msg.data);
+      document.getElementById('countdown').innerHTML = JSON.parse(msg.data).timeString;
+      if (JSON.parse(msg.data).timerStart == 'true')
+        $('#startMatchBtn').prop('disabled', true);
+      else
+        $('#startMatchBtn').prop('disabled', false);
+      updateMatchList(JSON.parse(msg.data).matchList)
+      showServerResponse(JSON.parse(msg.data))
     }
 
     socket.onclose = function() {
