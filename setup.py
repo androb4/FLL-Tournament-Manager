@@ -17,6 +17,7 @@ audioSource = AudioSource.DISPLAY_AUDIENCE
 
 class MatchListUploadHandler(tornado.web.RequestHandler):
     def post(self):
+        match_schedule.matchList = []
         fileinfo = self.request.files['filearg'][0]
         book = xlrd.open_workbook(file_contents=fileinfo['body'])
         sheet = book.sheet_by_index(0)
