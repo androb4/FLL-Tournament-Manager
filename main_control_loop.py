@@ -18,11 +18,6 @@ class MainControlLoop(threading.Thread):
     def __init__(self):
         threading.Thread.__init__(self)
         self._stopevent = threading.Event()
-        self.doStop = True
-    def startTimer(self):
-        self.doStop = False
-    def stopTimer(self):
-        self.doStop = True
     def stop(self):
         self.stopTimer()
         self._stopevent.set()
@@ -58,27 +53,3 @@ class MainControlLoop(threading.Thread):
             display_audience.send({'type':'matchState', 'data':{'matchState':matchState}})
             match_control.send({'type':'matchTime', 'data':{'matchTimeString':matchTimeString}})
             match_control.send({'type':'matchState', 'data':{'matchState':matchState}})
-
-
-            '''
-            while t >= 0 and not self.doStop:
-                #websocketData['timerStart'] = 'true'
-                minutes = int(t/60)
-                seconds = t - minutes*60
-                timeString = str(minutes) + ':' + str(seconds).zfill(2)
-                #matchState['timeString'] = str(minutes) + ':' + str(seconds).zfill(2)
-                display_audience.send(json.dumps({'type':'matchTime', 'data':{'matchTime':timeString}}))
-                match_control.send(json.dumps({'type':'matchTime', 'data':{'matchTime':timeString}}))
-                print t
-                t-=1
-                time.sleep(0.1)
-            if time == -1:
-                global matchDone
-                matchDone = True
-                websocketData['timerStart'] = 'false'
-                websocketData['matchReady'] = 'false'
-                match_schedule.currentMatchIndex+=1
-                matchControlSocket.write_message(json.dumps({'type':'matchIndex', 'data':{'currentMatchIndex':match_schedule.currentMatchIndex}}))
-            self.stopTimer()
-            #websocketData['timerStart'] = 'false'
-            '''
