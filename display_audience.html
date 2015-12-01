@@ -1,23 +1,49 @@
 <html>
-  <head>
-    <title>Main Display</title>
-    <script src="/js/jquery-1.11.3.min.js"></script>
-    <script src="/js/display_audience.js"></script>
-    <link rel="stylesheet" href="css/display_audience.css">
-  </head>
 
-  <body>
-    <table style="width:100%; margin-bottom:0">
-      <tr>
-        <td><img class="fll-logo" src="images/FIRSTLego_iconVert_RGB.png"></img></td>
-        <td style="background-color:red; border-radius: 20px"><font id="eventName">Hamilton MS Qualifying Tournament</font>
-        <font id="matchText">Match 4</font></td>
-        <td><img class="game-logo" src="images/FLL2015TrashTrekLogo-01.png"></img></td>
-      </tr>
-    </table>
+<head>
+  <title>Main Display</title>
+  <script src="/js/jquery-1.11.3.min.js"></script>
+  <script src="/lib/jquery.json.min.js"></script>
+  <script src="/lib/jquery.websocket-0.0.1.js"></script>
+  <script src="/js/cheesy-websocket.js"></script>
+  <script src="/js/display_audience.js"></script>
+  <link rel="stylesheet" href="css/display_audience.css">
+</head>
 
-    <div id="countdown">
-      2:30
-    </div>
-  </body>
+<body>
+  <table style="width:100%; height:100%">
+    <tr style="height:20%; max-height:20%">
+      <td width="20%">
+        <img class="fll-logo" src="images/FIRSTLego_iconVert_RGB2.png"></img>
+      </td>
+      <td style="background-color:red; border-radius: 20px">
+        <font id="eventName">Hamilton MS Qualifying Tournament</font>
+        <font id="matchText">Match <font id="matchNumber">4</font></font>
+      </td>
+      <td width="20%">
+        <img class="game-logo" src="images/FLL2015TrashTrekLogo-012.png"></img>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+          <font id="countdown" style="line-height:80%">2:30</font>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table style="width:100%; height:100%; font-size:5vmax">
+          <tr>
+            <td>Table 1</td>
+            <td>Table 1</td>
+          </tr>
+          <tr>
+            <td>118</td>
+            <td>148</td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</body>
+
 </html>

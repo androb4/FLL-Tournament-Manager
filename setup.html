@@ -13,7 +13,7 @@
   <nav class="navbar navbar-default navbar-inverse">
     <div class="container-fluid">
       <div class="navbar-header">
-        <a class="navbar-brand" href="/index">FLL Tournament Manager</a>
+        <a class="navbar-brand" href="/">FLL Tournament Manager</a>
       </div>
       <div>
         <ul class="nav navbar-nav">
@@ -32,30 +32,39 @@
         <small></small>
       </h1>
     </div>
+
+    <div class="alert alert-success alert-dismissible" role="alert">
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+      <strong>Warning!</strong> Better check yourself, you're not looking too good.
+    </div>
+
     <div class="well">
-        <h3>Match Schedule
-          <small>Upload a match schedule</small>
-        </h3>
+      <h3>Match Schedule
+        <small>Upload a match schedule</small>
+      </h3>
       <form enctype="multipart/form-data" action="/schedule_upload" method="post">
-        <input type="file" name="filearg"/>
+        <input type="file" name="filearg" />
         <br>
-        <input class="btn btn-primary" type="submit" value="Upload"/>
+        <input class="btn btn-primary" type="submit" value="Upload" />
       </form>
       <br>
       <h3>Audio Output
         <small>Select an output source for match sounds</small>
       </h3>
       <form>
-        <input type="radio" name="audio-source" value="controller" checked> Match Controller</input>
-        <br>
-        <input type="radio" name="audio-source" value="audience-display"> Audience Display</input>
-        <br>
-        <br>
-        <input class="btn btn-primary" type="submit" value="Save"/>
+        <div class="form-group">
+          <label class="radio-inline">
+            <input type="radio" name="audio-source" id="inlineRadio1" value="controller" checked> Match Controller
+          </label>
+          <label class="radio-inline">
+            <input type="radio" name="audio-source" id="inlineRadio2" value="audience-display"> Audience Display
+          </label>
+        </div>
+        <input class="btn btn-primary" type="submit" value="Save" />
       </form>
-      <form enctype="multipart/form-data" action="/schedule_upload" method="post">
 
-      </form>
     </div>
   </div>
 </body>

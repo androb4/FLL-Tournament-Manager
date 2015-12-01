@@ -10,6 +10,10 @@ import copy
 
 import match_schedule
 
+class AudioSource:
+    DISPLAY_AUDIENCE, MATCH_CONTROL = range(2)
+
+audioSource = AudioSource.DISPLAY_AUDIENCE
 
 class MatchListUploadHandler(tornado.web.RequestHandler):
     def post(self):

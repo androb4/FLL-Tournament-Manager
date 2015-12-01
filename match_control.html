@@ -7,6 +7,9 @@
   <link rel="stylesheet" type="text/css" href="/lib/bootstrap/css/bootstrap.min.css">
   <script src="/js/jquery-1.11.3.min.js"></script>
   <script src="/lib/bootstrap/js/bootstrap.min.js"></script>
+  <script src="/lib/jquery.json.min.js"></script>
+  <script src="/lib/jquery.websocket-0.0.1.js"></script>
+  <script src="/js/cheesy-websocket.js"></script>
   <script src="/js/match_control.js"></script>
 </head>
 
@@ -14,7 +17,7 @@
   <nav class="navbar navbar-default navbar-inverse">
     <div class="container-fluid">
       <div class="navbar-header">
-        <a class="navbar-brand" href="/index">FLL Tournament Manager</a>
+        <a class="navbar-brand" href="/">FLL Tournament Manager</a>
       </div>
       <div>
         <ul class="nav navbar-nav">
@@ -31,6 +34,10 @@
         <small></small>
       </h1>
     </div>
+
+    <select class="form-control" id="matchIndexSelect" style="width:50px">
+    </select>
+
     <div style="text-align:center">
       <div id="countdown" style="font-size:30px">
         2:30
@@ -40,13 +47,14 @@
       <button class="btn btn-danger" value="Reset Timer" id="resetTimerBtn">Reset Timer</button>
       <br>
       <br>
-      <table id="matchListTable" class="table" style="text-align:center">
-        <tr>
-          <td><b>Match #</b></td>
-          <td><b>Match Time</b></td>
-        </tr>
-
-      </table>
+      <div style="height:500px;overflow:auto;">
+        <table id="matchListTable" class="table" style="text-align:center">
+          <tr>
+            <td><b>Match #</b></td>
+            <td><b>Match Time</b></td>
+          </tr>
+        </table>
+      </div>
     </div>
   </div>
 </body>
