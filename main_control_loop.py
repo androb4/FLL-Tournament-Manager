@@ -1,6 +1,5 @@
 import time
 import threading
-import json
 
 import display_audience
 import match_control
@@ -8,8 +7,7 @@ import match_schedule
 
 matchState = 0
 lastTime = 0
-matchTime = 150
-
+countFrom = 150
 
 class MatchState:
     PRE_MATCH, START_MATCH, DURING_MATCH, END_MATCH, POST_MATCH = range(5)
@@ -19,24 +17,22 @@ class MainControlLoop(threading.Thread):
         threading.Thread.__init__(self)
         self._stopevent = threading.Event()
     def stop(self):
-        self.stopTimer()
         self._stopevent.set()
     def run(self):
         while not self._stopevent.is_set():
             global matchState
-            global matchTime
             global lastTime
             time.sleep(0.1)
             if matchState == MatchState.PRE_MATCH:
-                display_audience.send({'type':'currentMatch', 'data':{'matchIndex':match_schedule.currentMatchIndex, 'match':match_schedule.matchList}})
-                matchTime = 150
+                display_audience.send({'type':'matchList', 'data':{'matchIndex':match_schedule.currentMatchIndex, 'matchList':match_schedule.matchList}})
+                matchTime = countFrom
                 matchTimeString = str(int(matchTime/60)) + ":" + str(matchTime - int(matchTime/60)*60).zfill(2)
             if matchState == MatchState.START_MATCH:
                 display_audience.send({'type':'playSound', 'data':{'playSound':'startMatch'}})
                 startTime = time.time()
                 matchState = MatchState.DURING_MATCH
             if matchState == MatchState.DURING_MATCH:
-                matchTime = 150 - int(time.time() - startTime)
+                matchTime = countFrom - int(time.time() - startTime)
                 matchTimeString = str(int(matchTime/60)) + ":" + str(matchTime - int(matchTime/60)*60).zfill(2)
                 if lastTime != matchTime:
                     print matchTimeString
