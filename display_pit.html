@@ -6,19 +6,74 @@
   <script src="/lib/jquery.json.min.js"></script>
   <script src="/lib/jquery.websocket-0.0.1.js"></script>
   <script src="/js/cheesy-websocket.js"></script>
+  <script src="/js/display_pit.js"></script>
+  <link rel="stylesheet" href="css/display_pit.css">
 </head>
 
-<body style="margin:0px; overflow:hidden">
-  <div id="matchSchedule" style="padding:20px; width:100%; height:100%; background-color:#000000">
-    <table style="width:100%">
+<body style="height:100%; font-family:Helvetica; margin:0px; padding:0px; overflow:hidden; background-color:#EE1D23">
+  <div id="matchSchedulePage" style="height:100%; margin:20px; margin-left:40px; margin-right:40px">
+    <table>
       <tr>
-        <td><font style="font-weight:bold">Match</font></td>
-        <td><font style="font-weight:bold">Match Time</font></td>
+        <td style="font-size:35px; line-height:45px; font-weight:bold">
+          Hamilton MS FLL Tournament
+        </td>
+        <td style="font-size:35px; line-height:45px; font-weight:bold; text-align:right">
+          Match Schedule
+        </td>
       </tr>
     </table>
+    <div style="display:block; height:85%; background-color:#FFFFFF; border-radius:20px; margin-top:10px; padding-top:10px; overflow:hidden">
+      <table id="tableListHeader" style="text-align:center">
+        <tr style="font-weight:bold">
+          <td>
+            <font>Match</font>
+          </td>
+          <td>
+            <font>Match Time</font>
+          </td>
+        </tr>
+      </table>
+      <div style="height:100%; display:block; overflow:auto">
+        <table id="matchScheduleTable" style="text-align:center">
+        </table>
+      </div>
+    </div>
   </div>
-  <div id="rankings" style="padding:20px; width:100%; height:100%; background-color:#004000">
+
+  <div id="rankings" style="height:100%; margin:20px; margin-left:40px; margin-right:40px">
+    <table>
+      <tr>
+        <td style="font-size:35px; line-height:45px; font-weight:bold">
+          Hamilton MS FLL Tournament
+        </td>
+        <td style="font-size:35px; line-height:45px; font-weight:bold; text-align:right">
+          Rankings
+        </td>
+      </tr>
+    </table>
+    <div style="display:block; height:85%; background-color:#FFFFFF; border-radius:20px; margin-top:10px; padding-top:10px">
+      <table id="rankingsTable" style="text-align:center">
+        <tr style="font-weight:bold">
+          <td>
+            <font>Rank</font>
+          </td>
+          <td>
+            <font>Team Number</font>
+          </td>
+          <td>
+            <font>Team Name</font>
+          </td>
+          <td>
+            <font>Score</font>
+          </td>
+        </tr>
+      </table>
+    </div>
   </div>
+
+  <div id="curtain" style="visibility:hidden; background-color:#FFFFFF; border-radius:20px; position:absolute; top:25%; bottom:25%; left:25%; right:25%">
+  </div>
+
 </body>
 
 </html>

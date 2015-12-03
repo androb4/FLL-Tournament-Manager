@@ -1,0 +1,12 @@
+table {
+  width:100%;
+}
+
+table, th, td {
+  border-collapse: collapse;
+  border: 0px;
+}
+
+::-webkit-scrollbar {
+    display: none;
+}
