@@ -133,40 +133,6 @@ $(function() {
     socket.send('resetTimer');
   });
 
-  /*
-    // event handlers for websocket
-    if (socket) {
-
-      socket.onopen = function() {
-
-      }
-
-      socket.onmessage = function(msg) {
-        websocketData = JSON.parse(msg.data);
-        var message = JSON.parse(msg.data);
-        switch(message.type) {
-          case 'matchState':
-            document.getElementById("countdown").innerHTML = message.timeString;
-        }
-        console.log(message.type);
-        //document.getElementById("countdown").innerHTML = websocketData.timeString;
-        if (websocketData.timerStart == "true" || websocketData['matchReady'] == 'false')
-          $("#startMatchBtn").prop("disabled", true);
-        else
-          $("#startMatchBtn").prop("disabled", false);
-        updateMatchList(websocketData);
-        updateMatchIndexSelector(websocketData.matchList);
-        //showServerResponse(websocketData);
-      }
-
-      socket.onclose = function() {
-        showServerResponse("The connection has been closed.");
-      }
-
-    } else {
-      console.log("invalid socket");
-    }
-  */
   function showServerResponse(txt) {
     console.log(txt);
   }
