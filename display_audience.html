@@ -10,40 +10,32 @@
   <link rel="stylesheet" href="css/display_audience.css">
 </head>
 
-<body>
-  <table style="width:100%; height:100%">
-    <tr style="height:20%; max-height:20%">
-      <td width="20%">
-        <img class="fll-logo" src="images/FIRSTLego_iconVert_RGB2.png"></img>
-      </td>
-      <td style="background-color:red; border-radius: 20px">
-        <font id="eventName">Hamilton MS Qualifying Tournament</font>
-        <font id="matchText">Match <font id="matchNumber">4</font></font>
-      </td>
-      <td width="20%">
-        <img class="game-logo" src="images/FLL2015TrashTrekLogo-012.png"></img>
-      </td>
-    </tr>
+<body style="padding:0; background-color:#EE1D23; padding:40px; padding-top:30px">
+  <table id="title">
     <tr>
-      <td colspan="3">
-          <font id="countdown" style="line-height:80%">2:30</font>
-      </td>
-    </tr>
-    <tr>
-      <td colspan="3">
-        <table style="width:100%; height:100%; font-size:5vmax">
-          <tr>
-            <td>Table 1</td>
-            <td>Table 1</td>
-          </tr>
-          <tr>
-            <td>118</td>
-            <td>148</td>
-          </tr>
-        </table>
+      <td id="eventName">Hamilton FLL Tournament</td>
+      <td style="text-align:right">Match
+        <font id="matchNumber">1</font>
       </td>
     </tr>
   </table>
+  <div style="background-color:#FFFFFF; position:absolute; left:40px; right:40px; top:88px; bottom:40px; border-radius:20px">
+    <div id="countdown">
+      2:30
+    </div>
+    <table style="position:absolute; bottom:40px; text-align:center; font-size:50px; vertical-align:middle">
+      <tr>
+        <td id="tableName1" style="width:40%">Table 1</td>
+        <td rowspan=2>
+          <img class="game-logo" style="width:200px" src="images/FLL2015TrashTrekLogo-01.png"></img>
+        </td>
+        <td id="tableName2" style="width:40%">Table 2</td>
+      </tr>
+      <tr>
+        <td id="team1">4535</td>
+        <td id="team2">3453</td>
+      </tr>
+    </table>
+  </div>
 </body>
-
 </html>
