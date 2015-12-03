@@ -1,32 +1,28 @@
 html * {
+  margin:0;
   font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
   text-align: center;
-   overflow: hidden;
+  overflow: hidden;
+  cursor: none;
 }
-
+table {
+  width:100%;
+}
+table, th, td {
+  border-collapse: collapse;
+  border: 0px;
+}
+#title {
+  font-size:40px;
+  font-weight:bold;
+}
 #eventName {
-  font-size: 3vmax;
-  font-weight: bold;
+  text-align:left;
 }
-
 #matchText {
   font-size: 3vmax;
 }
-
 #countdown {
-  font-size: 50vmin;
-  padding-top: 0;
-  margin-top: 0;
-}
-
-.fll-logo {
-  display: block;
-  width: auto;
-  height: auto;
-  margin-left: 2vmax;
-  margin-right: 2vmax;
-}
-
-.game-logo {
-  //width: 17vmax;
+  font-size:300px;
+  margin-top:50px;
 }

@@ -7,9 +7,14 @@ if (!('WebSocket' in window)) {
 }
 
 function updateMatch(data) {
-  console.log(data.match)
   document.getElementById('matchNumber').innerHTML = data.matchIndex+1;
-  console.log(data.matchIndex)
+
+  if(data.matchList[data.matchIndex] != undefined) {
+    document.getElementById('tableName1').innerHTML = data.matchList[data.matchIndex].tables[0];
+    document.getElementById('tableName2').innerHTML = data.matchList[data.matchIndex].tables[1];
+    document.getElementById('team1').innerHTML = data.matchList[data.matchIndex].teams[0];
+    document.getElementById('team2').innerHTML = data.matchList[data.matchIndex].teams[1];
+  }
 }
 
 function updateMatchTime(data) {
@@ -35,9 +40,8 @@ function playSound(data) {
 }
 
 function setup() {
-  var path = '/display_audience/websocket';
   socket = new CheesyWebsocket('/display_audience/websocket', {
-    currentMatch: function(event) { updateMatch(event.data); },
+    matchList: function(event) { updateMatch(event.data); },
     matchTime: function(event) { updateMatchTime(event.data); },
     matchState: function(event) { handleMatchState(event.data); },
     playSound: function(event) { playSound(event.data); }
