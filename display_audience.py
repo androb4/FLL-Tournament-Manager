@@ -9,8 +9,6 @@ import match_schedule
 
 displayAudienceWebsocket = None
 
-timerStart = False
-
 class DisplayAudienceWebsocketHandler(tornado.websocket.WebSocketHandler):
   def open(self):
       global displayAudienceWebsocket

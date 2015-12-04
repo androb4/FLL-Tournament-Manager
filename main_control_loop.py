@@ -6,6 +6,7 @@ import match_control
 import match_schedule
 
 matchState = 0
+lastMatchState = 0
 lastTime = 0
 countFrom = 150
 
@@ -21,6 +22,7 @@ class MainControlLoop(threading.Thread):
     def run(self):
         while not self._stopevent.is_set():
             global matchState
+            global lastMatchState
             global lastTime
             time.sleep(0.1)
             if matchState == MatchState.PRE_MATCH:
@@ -45,7 +47,10 @@ class MainControlLoop(threading.Thread):
                 matchState = MatchState.POST_MATCH
             if matchState == MatchState.POST_MATCH:
                 pass
+            if lastMatchState != matchState:
+                display_audience.send({'type':'matchState', 'data':{'matchState':matchState}})
+                match_control.send({'type':'matchState', 'data':{'matchState':matchState}})
             display_audience.send({'type':'matchTime', 'data':{'matchTimeString':matchTimeString}})
-            display_audience.send({'type':'matchState', 'data':{'matchState':matchState}})
             match_control.send({'type':'matchTime', 'data':{'matchTimeString':matchTimeString}})
-            match_control.send({'type':'matchState', 'data':{'matchState':matchState}})
+
+            lastMatchState = matchState
