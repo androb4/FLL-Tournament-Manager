@@ -49,7 +49,7 @@ function addEditButtons() {
   for(m=1; m<table.rows.length; m++) {
     row = table.rows[m];
     cell = row.cells[row.cells.length-1];
-    cell.innerHTML = '<button type="button" class="btn btn-success btn-xs" value="' + (m-1) + '"data-toggle="modal" data-target="#myModal">Edit</button>';
+    cell.innerHTML = '<button type="button" class="btn btn-success btn-xs" data-match-index="' + (m-1) + '"data-toggle="modal" data-target="#editScoreModal">Edit</button>';
   }
 }
 
@@ -75,5 +75,18 @@ $(function() {
     matchList: function(event) { updateMatchList(event.data); },
     currentMatchIndex: function(event) { updateCurrentMatch(event.data); },
     scores: function(event) { updateScores(event.data); }
+  });
+
+  $('#editScoreModal').on('show.bs.modal', function (event) {
+    var button = $(event.relatedTarget); // Button that triggered the modal
+    var matchNumber = button.data('match-index')+1; // Extract info from data-* attributes
+    var modal = $(this);
+    modal.find('.modal-title').text('Edit score for match ' + matchNumber);
+    modal.find('.modal-body team1').val('1234');
+    modal.find('.modal-body team2').val('4321');
+  });
+
+  $('#publishScore').click(function() {
+    publishScore();
   });
 });
