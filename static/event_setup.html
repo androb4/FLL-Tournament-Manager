@@ -7,6 +7,10 @@
   <link rel="stylesheet" type="text/css" href="/lib/bootstrap/css/bootstrap.min.css">
   <script src="/js/jquery-1.11.3.min.js"></script>
   <script src="/lib/bootstrap/js/bootstrap.min.js"></script>
+  <script src="/lib/jquery.json.min.js"></script>
+  <script src="/lib/jquery.websocket-0.0.1.js"></script>
+  <script src="/js/cheesy-websocket.js"></script>
+  <script src="/js/event_setup.js"></script>
 </head>
 
 <body>
@@ -64,7 +68,11 @@
         </div>
         <input class="btn btn-primary" type="submit" value="Save" />
       </form>
-
+      <h3>Database
+        <small></small>
+      </h3>
+        <input class="btn btn-danger" type="submit" value="Reset Match Scores" />
+        <input id="clearDtabaseButton" class="btn btn-danger" type="submit" value="Clear Database" />
     </div>
   </div>
 </body>
