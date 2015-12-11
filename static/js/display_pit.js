@@ -5,8 +5,6 @@ function updateMatchSchedule(data) {
   var row;
   var cell;
 
-  //$("#bowlerList:not(:first)").remove();
-
   updateTableList(data.tableList);
   var tablesRow = document.getElementById('tableListHeader').rows[0];
 
