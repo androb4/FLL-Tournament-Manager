@@ -11,7 +11,7 @@ lastTime = 0
 countFrom = 150
 
 class MatchState:
-    PRE_MATCH, START_MATCH, DURING_MATCH, END_MATCH, POST_MATCH = range(5)
+    PRE_MATCH, START_MATCH, DURING_MATCH, END_MATCH, ABORT_MATCH, POST_MATCH = range(6)
 
 class MainControlLoop(threading.Thread):
     def __init__(self):
@@ -27,6 +27,7 @@ class MainControlLoop(threading.Thread):
             time.sleep(0.1)
             if matchState == MatchState.PRE_MATCH:
                 display_audience.send({'type':'matchList', 'data':{'matchIndex':match_schedule.currentMatchIndex, 'matchList':match_schedule.matchList}})
+                match_control.send({'type':'matchIndex', 'data':{'currentMatchIndex':match_schedule.currentMatchIndex}})
                 matchTime = countFrom
                 matchTimeString = str(int(matchTime/60)) + ":" + str(matchTime - int(matchTime/60)*60).zfill(2)
             if matchState == MatchState.START_MATCH:
@@ -35,15 +36,17 @@ class MainControlLoop(threading.Thread):
                 matchState = MatchState.DURING_MATCH
             if matchState == MatchState.DURING_MATCH:
                 matchTime = countFrom - int(time.time() - startTime)
-                matchTimeString = str(int(matchTime/60)) + ":" + str(matchTime - int(matchTime/60)*60).zfill(2)
                 if lastTime != matchTime:
-                    print matchTimeString
+                    matchTimeString = str(int(matchTime/60)) + ":" + str(matchTime - int(matchTime/60)*60).zfill(2)
                 if matchTime == 0:
                     matchState = MatchState.END_MATCH
                 lastTime = matchTime
             if matchState == MatchState.END_MATCH:
                 display_audience.send({'type':'playSound', 'data':{'playSound':'endMatch'}})
-                match_schedule.currentMatchIndex =+ 1
+                match_schedule.currentMatchIndex = match_schedule.currentMatchIndex + 1
+                matchState = MatchState.POST_MATCH
+            if matchState == MatchState.ABORT_MATCH:
+                display_audience.send({'type':'playSound', 'data':{'playSound':'abortMatch'}})
                 matchState = MatchState.POST_MATCH
             if matchState == MatchState.POST_MATCH:
                 pass

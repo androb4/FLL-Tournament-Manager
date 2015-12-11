@@ -22,7 +22,7 @@ function updateMatchTime(data) {
 }
 
 function handleMatchState(data) {
-  if(data.matchState == 4) {
+  if(data.matchState == 4 || data.matchState == 5) {
     document.getElementById("countdown").style.color = "red";
   }
   else {
@@ -36,6 +36,9 @@ function playSound(data) {
   }
   if(data.playSound == 'endMatch') {
     new Audio('/sounds/match_end.wav').play();
+  }
+  if(data.playSound == 'abortMatch') {
+    new Audio('/sounds/match_abort.mp3').play();
   }
 }
 
