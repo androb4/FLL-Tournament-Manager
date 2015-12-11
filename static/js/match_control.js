@@ -9,6 +9,23 @@ var matchControl = {
   "tableList": []
 };
 
+var MatchState = {
+  PRE_MATCH: 0,
+  START_MATCH: 1,
+  DURING_MATCH: 2,
+  END_MATCH: 3,
+  ABORT_MATCH: 4,
+  POST_MATCH: 5,
+  properties: {
+    0: {text: "Pre-Match"},
+    1: {text: "Start Match"},
+    2: {text: "During Match"},
+    3: {text: "End Match"},
+    4: {text: "Abort Match"},
+    5: {text: "Post-Match"},
+  }
+};
+
 function updateMatchList(data) {
   console.log(data)
   var table = document.getElementById("matchListTable");
@@ -25,9 +42,11 @@ function updateMatchList(data) {
 
   row = table.rows[0];
 
+  console.log(data.tableList);
+
   for (t = 0; t < data.tableList.length; t++) {
     cell = row.insertCell(t + 2);
-    cell.innerHTML = "<b>" + data.tableList[t] + "</b>";
+    cell.innerHTML = data.tableList[t][1];
   }
 
   for (m = 0; m < data.matchList.length; m++) {
@@ -37,15 +56,19 @@ function updateMatchList(data) {
       row.classList.add("success");
 
     cell = row.insertCell(0);
-    cell.innerHTML = data.matchList[m].matchNumber;
+    cell.innerHTML = data.matchList[m][0];
 
     cell = row.insertCell(1);
-    cell.innerHTML = data.matchList[m].matchTime;
+    cell.innerHTML = data.matchList[m][1];
 
     for (t = 0; t < table.rows[0].cells.length - 2; t++) {
-      if (table.rows[0].cells[t + 2].innerHTML.includes(data.matchList[m].tables[t % 2])) {
+      if (table.rows[0].cells[t + 2].innerHTML == data.matchList[m][2]) {
         cell = row.insertCell(t + 2);
-        cell.innerHTML = data.matchList[m].teams[t % 2];
+        cell.innerHTML = data.matchList[m][4];
+      }
+      else if (table.rows[0].cells[t + 2].innerHTML == data.matchList[m][3]) {
+        cell = row.insertCell(t + 2);
+        cell.innerHTML = data.matchList[m][5];
       } else {
         cell = row.insertCell(t + 2);
       }
@@ -77,7 +100,7 @@ function updateMatchIndexSelector(data) {
 
   for (m = 0; m < data.matchList.length; m++) {
     var option = document.createElement("option");
-    option.text = data.matchList[m].matchNumber;
+    option.text = data.matchList[m][0];
     select.add(option);
   }
   select.selectedIndex = data.currentMatchIndex;
@@ -88,18 +111,24 @@ function updateMatchIndex(data) {
 }
 
 function updateMatchTime(data) {
-  console.log(data);
   document.getElementById("countdown").innerHTML = data.matchTimeString;
 }
 
 function updateMatchState(data) {
+  document.getElementById('matchState').innerHTML = MatchState.properties[data.matchState].text;
   if(data.matchState == 0) {
     $("#startMatchBtn").prop("disabled", false);
   }
   else {
     $("#startMatchBtn").prop("disabled", true);
   }
-  console.log(data);
+
+  if(data.matchState == 2) {
+    $("#matchIndexSelect").prop("disabled", true);
+  }
+  else {
+    $("#matchIndexSelect").prop("disabled", false);
+  }
 }
 
 $(function() {
