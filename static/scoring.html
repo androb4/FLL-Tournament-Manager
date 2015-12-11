@@ -23,7 +23,7 @@
         <ul class="nav navbar-nav">
           <li><a href="/match_control">Match Control</a></li>
           <li class="active"><a href="/scoring">Scoring</a></li>
-          <li><a href="/event_setup">Setup</a></li>
+          <li><a href="/event_setup">Event Setup</a></li>
         </ul>
       </div>
     </div>
@@ -52,7 +52,7 @@
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
-            <h4 class="modal-title" id="myModalLabel"></h4>
+            <h4 class="modal-title">Edit score for match <font id="matchNumber"></font></h4>
           </div>
           <div class="modal-body" style="text-align:center">
             <table style="text-align:center; width:100%">
@@ -62,11 +62,11 @@
               </tr>
               <tr>
                 <td id="team1"></td>
-                <td id="tesm2"></td>
+                <td id="team2"></td>
               </tr>
               <tr>
-                <td><input type="number" class="form-control" placeholder="Score"></td>
-                <td><input type="number" class="form-control" placeholder="Score"></td>
+                <td><input id="score1" type="number" class="form-control" placeholder="Score"></td>
+                <td><input id="score2" type="number" class="form-control" placeholder="Score"></td>
               </tr>
             </table>
           </div>

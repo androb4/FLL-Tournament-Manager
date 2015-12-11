@@ -23,7 +23,7 @@
         <ul class="nav navbar-nav">
           <li class="active"><a href="/match_control">Match Control</a></li>
           <li><a href="/scoring">Scoring</a></li>
-          <li><a href="/event_setup">Setup</a></li>
+          <li><a href="/event_setup">Event Setup</a></li>
         </ul>
       </div>
     </div>
@@ -35,8 +35,13 @@
       </h1>
     </div>
 
-    <select class="form-control" id="matchIndexSelect" style="width:50px">
-    </select>
+    <font style="font-weight:bold">Match State: </font>
+    <font id="matchState"></font>
+    <div style="display:block">
+      <label>Current Match: </label>
+      <select class="form-control" id="matchIndexSelect" style="width:50px">
+      </select>
+    </div>
 
     <div style="text-align:center">
       <div id="countdown" style="font-size:30px">
@@ -49,7 +54,7 @@
       <br>
       <div style="height:500px;overflow:auto;">
         <table id="matchListTable" class="table" style="text-align:center">
-          <tr>
+          <tr style="font-weight:bold">
             <td><b>Match #</b></td>
             <td><b>Match Time</b></td>
           </tr>
