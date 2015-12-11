@@ -1,0 +1,5 @@
+CREATE TABLE Rankings(
+  id INTEGER PRIMARY KEY,
+  team INTEGER,
+  score INTEGER
+)

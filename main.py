@@ -9,7 +9,7 @@ import match_control
 import display_audience
 import display_pit
 import scoring
-
+import database
 
 application = tornado.web.Application([
   (r'/()', tornado.web.StaticFileHandler, {"path": "./static/index.html"}),
@@ -22,6 +22,7 @@ application = tornado.web.Application([
   (r'/scoring()', tornado.web.StaticFileHandler, {"path": "./static/scoring.html"}),
   (r'/scoring/websocket', scoring.ScoringWebsocketHandler),
   (r'/event_setup()', tornado.web.StaticFileHandler, {"path": "./static/event_setup.html"}),
+  (r'/event_setup/websocket', event_setup.EventSetupWebsocketHandler),
   (r"/schedule_upload", event_setup.MatchListUploadHandler),
   (r"/(.*)", tornado.web.StaticFileHandler, {"path": "./static"}),
 ])
