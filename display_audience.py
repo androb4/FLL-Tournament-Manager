@@ -6,6 +6,7 @@ import json
 
 import match_control
 import match_schedule
+import database
 
 displayAudienceWebsocket = None
 
@@ -14,7 +15,7 @@ class DisplayAudienceWebsocketHandler(tornado.websocket.WebSocketHandler):
       global displayAudienceWebsocket
       displayAudienceWebsocket = self
       print 'Audience display connected'
-      self.write_message(json.dumps({'type':'matchList', 'data':{'matchIndex':match_schedule.currentMatchIndex, 'matchList':match_schedule.matchList}}))
+      self.write_message(json.dumps({'type':'matchList', 'data':{'matchIndex':match_schedule.currentMatchIndex, 'matchList':database.getMatchList()}}))
 
   def on_message(self, message):
       print 'received:', message

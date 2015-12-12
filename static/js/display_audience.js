@@ -10,10 +10,10 @@ function updateMatch(data) {
   document.getElementById('matchNumber').innerHTML = data.matchIndex+1;
 
   if(data.matchList[data.matchIndex] != undefined) {
-    document.getElementById('tableName1').innerHTML = data.matchList[data.matchIndex].tables[0];
-    document.getElementById('tableName2').innerHTML = data.matchList[data.matchIndex].tables[1];
-    document.getElementById('team1').innerHTML = data.matchList[data.matchIndex].teams[0];
-    document.getElementById('team2').innerHTML = data.matchList[data.matchIndex].teams[1];
+    document.getElementById('tableName1').innerHTML = data.matchList[data.matchIndex][2];
+    document.getElementById('tableName2').innerHTML = data.matchList[data.matchIndex][3];
+    document.getElementById('team1').innerHTML = data.matchList[data.matchIndex][4];
+    document.getElementById('team2').innerHTML = data.matchList[data.matchIndex][5];
   }
 }
 
@@ -22,7 +22,7 @@ function updateMatchTime(data) {
 }
 
 function handleMatchState(data) {
-  if(data.matchState == 4 || data.matchState == 5) {
+  if(data.matchState == 5 || data.matchState == 6) {
     document.getElementById("countdown").style.color = "red";
   }
   else {

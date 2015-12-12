@@ -29,9 +29,10 @@ class MatchControlWebsocketHandler(tornado.websocket.WebSocketHandler):
           if main_control_loop.matchState == main_control_loop.MatchState.DURING_MATCH:
               main_control_loop.matchState = main_control_loop.MatchState.ABORT_MATCH
           elif main_control_loop.matchState == main_control_loop.MatchState.POST_MATCH:
-              main_control_loop.matchState = main_control_loop.MatchState.PRE_MATCH
+              main_control_loop.matchState = main_control_loop.MatchState.SETUP_MATCH
       if msg['type'] == 'updateMatchIndex':
           match_schedule.currentMatchIndex = int(msg['data']['matchIndex'])
+          display_audience.send({'type':'matchList', 'data':{'matchIndex':match_schedule.currentMatchIndex, 'matchList':database.getMatchList()}})
 
   def on_close(self):
       global matchControlSocket

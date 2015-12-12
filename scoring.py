@@ -6,6 +6,8 @@ import json
 
 import match_schedule
 import database
+import rankings
+import display_pit
 
 scoringWebsocketHandler = None
 
@@ -23,6 +25,8 @@ class ScoringWebsocketHandler(tornado.websocket.WebSocketHandler):
       msg = json.loads(message)
       if msg['type'] == 'score':
           database.editScore(msg['data'])
+          rankings.updateRankings()
+          display_pit.send({'type':'rankings', 'data':{'rankings':database.getRankings()}})
           self.write_message(json.dumps({'type':'matchList', 'data':{'matchList':database.getMatchList(), 'tableList':database.getTableNames()}}))
 
   def on_close(self):

@@ -1,0 +1,4 @@
+CREATE TABLE Teams(
+  id INTEGER PRIMARY KEY,
+  highestScore INTEGER
+)

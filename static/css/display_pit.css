@@ -1,7 +1,6 @@
 html * {
   margin:0;
   font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
-  text-align: center;
   overflow: hidden;
   cursor: none;
 }
@@ -13,6 +12,10 @@ table {
 table, th, td {
   border-collapse: collapse;
   border: 0px;
+}
+
+#rankingsTable {
+  font-size: 105%;
 }
 
 ::-webkit-scrollbar {

@@ -55,5 +55,7 @@ class MatchListUploadHandler(tornado.web.RequestHandler):
                     match['matchTime'] = sheet.row_values(r)[1]
                     match['teams'].append(int(sheet.row_values(r)[t]))
                     match['tables'].append(match_schedule.tableNames[t-2])
+            database.addTeam(match['teams'][0])
+            database.addTeam(match['teams'][1])
             match_schedule.matchList.append(match)
             database.addMatch(match['matchNumber'], match['matchTime'], match['tables'][0], match['tables'][1], match['teams'][0], match['teams'][1])

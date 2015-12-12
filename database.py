@@ -14,12 +14,17 @@ def checkTableExists(dbcon, tablename):
     dbcur.close()
     return False
 
-database = sqlite.connect('db.db')
+database = sqlite.connect('db.db', check_same_thread=False)
 cursor = database.cursor()
 isInitialized = False
 
 
 def createDtabase():
+    if not checkTableExists(database, 'Teams'):
+        scriptFile = open('./db/teams.sql', 'r')
+        script = scriptFile.read()
+        scriptFile.close()
+        cursor.executescript(script)
     if not checkTableExists(database, 'Matches'):
         scriptFile = open('./db/matches.sql', 'r')
         script = scriptFile.read()
@@ -37,6 +42,12 @@ def createDtabase():
         cursor.executescript(script)
     global isInitialized
     isInitialized = True
+
+def addTeam(teamNumber):
+    if not isInitialized:
+        createDtabase()
+    cursor.execute("INSERT OR REPLACE INTO Teams VALUES (?, ?);", (teamNumber, -1))
+    database.commit()
 
 def addTable(tableName):
     if not isInitialized:
@@ -61,7 +72,28 @@ def getMatchList():
 
 def editScore(data):
     cursor.execute("UPDATE Matches SET isScored=?, score1=?, score2=? WHERE id=?", (True, data['team1']['score'], data['team2']['score'], data['match']))
+    if int(getTeam(data['team1']['teamNumber'])[0][1]) < int(data['team1']['score']):
+        cursor.execute("UPDATE Teams SET highestScore=? WHERE id=?", (data['team1']['score'], data['team1']['teamNumber']))
+    if int(getTeam(data['team2']['teamNumber'])[0][1]) < int(data['team2']['score']):
+        cursor.execute("UPDATE Teams SET highestScore=? WHERE id=?", (data['team2']['score'], data['team2']['teamNumber']))
     database.commit()
+
+def getTeam(teamNumber):
+    cursor.execute("SELECT * FROM Teams WHERE id=?", (teamNumber,))
+    return cursor.fetchall()
+
+def getTeams():
+    cursor.execute("SELECT * FROM Teams")
+    return cursor.fetchall()
+
+def updateRankings(rankings):
+    cursor.execute("DELETE FROM Rankings")
+    cursor.executemany("INSERT OR REPLACE INTO Rankings(team, score) VALUES(?, ?);", rankings)
+    database.commit()
+
+def getRankings():
+    cursor.execute("SELECT * FROM Rankings")
+    return cursor.fetchall()
 
 def clearDatabase():
     cursor.execute("DROP TABLE IF EXISTS Matches")

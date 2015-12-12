@@ -10,19 +10,21 @@ var matchControl = {
 };
 
 var MatchState = {
-  PRE_MATCH: 0,
-  START_MATCH: 1,
-  DURING_MATCH: 2,
-  END_MATCH: 3,
-  ABORT_MATCH: 4,
-  POST_MATCH: 5,
+  SETUP_MATCH: 0,
+  PRE_MATCH: 1,
+  START_MATCH: 2,
+  DURING_MATCH: 3,
+  END_MATCH: 4,
+  ABORT_MATCH: 5,
+  POST_MATCH: 6,
   properties: {
-    0: {text: "Pre-Match"},
-    1: {text: "Start Match"},
-    2: {text: "During Match"},
-    3: {text: "End Match"},
-    4: {text: "Abort Match"},
-    5: {text: "Post-Match"},
+    0: {text: "Setup Match"},
+    1: {text: "Pre-Match"},
+    2: {text: "Start Match"},
+    3: {text: "During Match"},
+    4: {text: "End Match"},
+    5: {text: "Abort Match"},
+    6: {text: "Post-Match"},
   }
 };
 
@@ -52,8 +54,8 @@ function updateMatchList(data) {
   for (m = 0; m < data.matchList.length; m++) {
     row = table.insertRow(m + 1);
 
-    if (m == 0)
-      row.classList.add("success");
+    //if (m == 0)
+      //row.classList.add("success");
 
     cell = row.insertCell(0);
     cell.innerHTML = data.matchList[m][0];
@@ -116,14 +118,14 @@ function updateMatchTime(data) {
 
 function updateMatchState(data) {
   document.getElementById('matchState').innerHTML = MatchState.properties[data.matchState].text;
-  if(data.matchState == 0) {
+  if(data.matchState == MatchState.PRE_MATCH) {
     $("#startMatchBtn").prop("disabled", false);
   }
   else {
     $("#startMatchBtn").prop("disabled", true);
   }
 
-  if(data.matchState == 2) {
+  if(data.matchState == MatchState.DURING_MATCH) {
     $("#matchIndexSelect").prop("disabled", true);
   }
   else {
